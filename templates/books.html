@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books | Smart Library</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+        }
+
+        .navbar {
+            background: #0f172a;
+            padding: 18px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .navbar h2 {
+            color: white;
+            margin: 0;
+        }
+
+        .navbar a {
+            color: #e2e8f0;
+            text-decoration: none;
+            margin-left: 18px;
+            font-size: 14px;
+        }
+
+        .navbar a:hover {
+            color: #60a5fa;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .heading {
+            margin-bottom: 25px;
+        }
+
+        .heading h1 {
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .heading p {
+            color: #64748b;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .search-box input {
+            flex: 1;
+            min-width: 200px;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .search-box button {
+            padding: 13px 22px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 22px;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .book-card h3 {
+            margin-top: 0;
+            color: #0f172a;
+            font-size: 19px;
+        }
+
+        .book-card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .category {
+            display: inline-block;
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .available {
+            color: #15803d !important;
+            font-weight: bold;
+        }
+
+        .unavailable {
+            color: #dc2626 !important;
+            font-weight: bold;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            background: #2563eb;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .waitlist-btn {
+            background: #7c3aed;
+        }
+
+        .waitlist-btn:hover {
+            background: #6d28d9;
+        }
+
+        .empty {
+            text-align: center;
+            background: white;
+            padding: 35px;
+            border-radius: 10px;
+            color: #64748b;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 18px;
+            }
+
+            .navbar a {
+                margin-left: 8px;
+            }
+
+            .container {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <h2>📚 Smart Library</h2>
+
+        <div>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('books') }}">Books</a>
+            <a href="{{ url_for('my_books') }}">My Books</a>
+            <a href="{{ url_for('waitlist') }}">Waitlist</a>
+            <a href="{{ url_for('recommendations') }}">Recommendations</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <div class="heading">
+            <h1>Explore Our Books 📖</h1>
+            <p>Search, discover, and borrow your favourite books.</p>
+        </div>
+
+        <!-- Search -->
+        <form method="GET" action="{{ url_for('books') }}" class="search-box">
+            <input
+                type="text"
+                name="q"
+                placeholder="Search by title, author, or category..."
+                value="{{ request.args.get('q', '') }}"
+            >
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Book List -->
+        {% if books %}
+
+            <div class="book-grid">
+
+                {% for book in books %}
+
+                    <div class="book-card">
+
+                        <span class="category">
+                            {{ book.category }}
+                        </span>
+
+                        <h3>{{ book.title }}</h3>
+
+                        <p>
+                            <strong>Author:</strong>
+                            {{ book.author }}
+                        </p>
+
+                        <p>
+                            <strong>Book ID:</strong>
+                            {{ book.id }}
+                        </p>
+
+                        {% if book.available > 0 %}
+
+                            <p class="available">
+                                Available Copies: {{ book.available }}
+                            </p>
+
+                            <!-- FIXED BORROW BUTTON -->
+                            <form
+                                method="POST"
+                                action="{{ url_for('borrow', book_id=book.id) }}"
+                            >
+                                <button type="submit" class="action-btn">
+                                    Borrow Book
+                                </button>
+                            </form>
+
+                        {% else %}
+
+                            <p class="unavailable">
+                                Currently Unavailable
+                            </p>
+
+                            <!-- JOIN WAITLIST -->
+                            <form
+                                method="POST"
+                                action="{{ url_for('join_waitlist', book_id=book.id) }}"
+                            >
+                                <button type="submit" class="action-btn waitlist-btn">
+                                    Join Waitlist
+                                </button>
+                            </form>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="empty">
+                <h3>No Books Found 📚</h3>
+                <p>Try searching with another title, author, or category.</p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <footer class="footer">
+        Smart Library Management System | Built with Python, Flask & SQLite
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Book - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚
+            <span>Smart Library</span>
+        </div>
+
+        <div class="student-info">
+
+            <div class="student-avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Library Admin</strong>
+                <small>Administrator</small>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/admin">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/add-book"
+               class="active">
+                ➕ <span>Add Book</span>
+            </a>
+
+            <a href="/admin/books">
+                📚 <span>Manage Books</span>
+            </a>
+
+            <a href="/admin/members">
+                👥 <span>Members</span>
+            </a>
+
+            <a href="/admin/transactions">
+                📋 <span>Transactions</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-topbar">
+
+            <div>
+
+                <p class="dashboard-label">
+                    ADMINISTRATION
+                </p>
+
+                <h1>
+                    Add New Book 📚
+                </h1>
+
+                <p class="dashboard-description">
+                    Add a new book to the library collection.
+                </p>
+
+            </div>
+
+            <div class="topbar-avatar">
+                A
+            </div>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="admin-form-card">
+
+            <div class="admin-form-header">
+
+                <div class="admin-form-icon">
+                    📖
+                </div>
+
+                <div>
+
+                    <h2>Book Information</h2>
+
+                    <p>
+                        Enter the details of the new book.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form method="POST">
+
+
+                <div class="admin-form-grid">
+
+
+                    <!-- TITLE -->
+
+                    <div class="admin-form-group">
+
+                        <label>
+                            Book Title
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="Enter book title"
+                            required>
+
+                    </div>
+
+
+                    <!-- AUTHOR -->
+
+                    <div class="admin-form-group">
+
+                        <label>
+                            Author
+                        </label>
+
+                        <input
+                            type="text"
+                            name="author"
+                            placeholder="Enter author name"
+                            required>
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="admin-form-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select name="category"
+                                required>
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option>
+                                Programming
+                            </option>
+
+                            <option>
+                                Computer Science
+                            </option>
+
+                            <option>
+                                Artificial Intelligence
+                            </option>
+
+                            <option>
+                                Web Development
+                            </option>
+
+                            <option>
+                                Self Development
+                            </option>
+
+                            <option>
+                                Fiction
+                            </option>
+
+                            <option>
+                                Fantasy
+                            </option>
+
+                            <option>
+                                Science
+                            </option>
+
+                            <option>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- QUANTITY -->
+
+                    <div class="admin-form-group">
+
+                        <label>
+                            Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            name="quantity"
+                            min="1"
+                            value="1"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-form-actions">
+
+                    <a href="/admin"
+                       class="cancel-btn">
+
+                        Cancel
+
+                    </a>
+
+                    <button type="submit"
+                            class="primary-btn">
+
+                        ➕ Add Book
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Book - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚
+            <span>Smart Library</span>
+        </div>
+
+        <div class="student-info">
+
+            <div class="student-avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Library Admin</strong>
+                <small>Administrator</small>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/admin">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/add-book">
+                ➕ <span>Add Book</span>
+            </a>
+
+            <a href="/admin/books"
+               class="active">
+                📚 <span>Manage Books</span>
+            </a>
+
+            <a href="/admin/members">
+                👥 <span>Members</span>
+            </a>
+
+            <a href="/admin/transactions">
+                📋 <span>Transactions</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-topbar">
+
+            <div>
+
+                <p class="dashboard-label">
+                    ADMINISTRATION
+                </p>
+
+                <h1>
+                    Edit Book ✏️
+                </h1>
+
+                <p class="dashboard-description">
+                    Update the information of this book.
+                </p>
+
+            </div>
+
+            <div class="topbar-avatar">
+                A
+            </div>
+
+        </div>
+
+
+        <div class="admin-form-card">
+
+            <div class="admin-form-header">
+
+                <div class="admin-form-icon">
+                    ✏️
+                </div>
+
+                <div>
+
+                    <h2>
+                        Edit Book Information
+                    </h2>
+
+                    <p>
+                        Update the details below.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if error %}
+
+            <div class="error">
+                {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                <div class="admin-form-grid">
+
+
+                    <div class="admin-form-group">
+
+                        <label>
+                            Book Title
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            value="{{ book.title }}"
+                            required>
+
+                    </div>
+
+
+                    <div class="admin-form-group">
+
+                        <label>
+                            Author
+                        </label>
+
+                        <input
+                            type="text"
+                            name="author"
+                            value="{{ book.author }}"
+                            required>
+
+                    </div>
+
+
+                    <div class="admin-form-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select name="category"
+                                required>
+
+                            <option value="Programming"
+                                {% if book.category == "Programming" %}selected{% endif %}>
+                                Programming
+                            </option>
+
+                            <option value="Computer Science"
+                                {% if book.category == "Computer Science" %}selected{% endif %}>
+                                Computer Science
+                            </option>
+
+                            <option value="Artificial Intelligence"
+                                {% if book.category == "Artificial Intelligence" %}selected{% endif %}>
+                                Artificial Intelligence
+                            </option>
+
+                            <option value="Web Development"
+                                {% if book.category == "Web Development" %}selected{% endif %}>
+                                Web Development
+                            </option>
+
+                            <option value="Self Development"
+                                {% if book.category == "Self Development" %}selected{% endif %}>
+                                Self Development
+                            </option>
+
+                            <option value="Fiction"
+                                {% if book.category == "Fiction" %}selected{% endif %}>
+                                Fiction
+                            </option>
+
+                            <option value="Fantasy"
+                                {% if book.category == "Fantasy" %}selected{% endif %}>
+                                Fantasy
+                            </option>
+
+                            <option value="Science"
+                                {% if book.category == "Science" %}selected{% endif %}>
+                                Science
+                            </option>
+
+                            <option value="Other"
+                                {% if book.category == "Other" %}selected{% endif %}>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="admin-form-group">
+
+                        <label>
+                            Total Quantity
+                        </label>
+
+                        <input
+                            type="number"
+                            name="quantity"
+                            min="1"
+                            value="{{ book.quantity }}"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="admin-form-actions">
+
+                    <a href="/admin/books"
+                       class="cancel-btn">
+
+                        Cancel
+
+                    </a>
+
+                    <button type="submit"
+                            class="primary-btn">
+
+                        💾 Save Changes
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

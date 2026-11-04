@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transactions - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- ==============================
+         SIDEBAR
+    =============================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚
+            <span>Smart Library</span>
+        </div>
+
+        <div class="student-info">
+
+            <div class="student-avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Library Admin</strong>
+                <small>Administrator</small>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/admin">
+                📊
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/books">
+                📚
+                <span>Manage Books</span>
+            </a>
+
+            <a href="/admin/members">
+                👥
+                <span>Members</span>
+            </a>
+
+            <a href="/admin/transactions" class="active">
+                📋
+                <span>Transactions</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    =============================== -->
+
+    <main class="dashboard-main">
+
+        <!-- TOP BAR -->
+
+        <div class="dashboard-topbar">
+
+            <div>
+
+                <p class="dashboard-label">
+                    ADMINISTRATION
+                </p>
+
+                <h1>
+                    Transactions 📋
+                </h1>
+
+                <p class="dashboard-description">
+                    View all book borrowing and return history.
+                </p>
+
+            </div>
+
+            <div class="topbar-avatar">
+                A
+            </div>
+
+        </div>
+
+
+        <!-- TRANSACTIONS SECTION -->
+
+        <section class="admin-section">
+
+            <div class="admin-section-header">
+
+                <div>
+
+                    <h2>
+                        Library Transactions
+                    </h2>
+
+                    <p>
+                        Complete record of books issued and returned.
+                    </p>
+
+                </div>
+
+                <div class="transaction-count">
+                    {{ transactions|length }} Records
+                </div>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="admin-table-wrapper">
+
+                <table class="admin-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Student</th>
+
+                            <th>Student ID</th>
+
+                            <th>Book</th>
+
+                            <th>Borrowed</th>
+
+                            <th>Returned</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                    {% for transaction in transactions %}
+
+                        <tr>
+
+                            <td>
+                                #{{ transaction["id"] }}
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    {{ transaction["name"] }}
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+
+                                {% if transaction["student_id"] %}
+
+                                    {{ transaction["student_id"] }}
+
+                                {% else %}
+
+                                    Not provided
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                📖
+                                {{ transaction["title"] }}
+
+                            </td>
+
+
+                            <td>
+
+                                {{ transaction["borrowed_at"] }}
+
+                            </td>
+
+
+                            <td>
+
+                                {% if transaction["returned_at"] %}
+
+                                    {{ transaction["returned_at"] }}
+
+                                {% else %}
+
+                                    —
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                {% if transaction["status"] == "borrowed" %}
+
+                                    <span class="transaction-status borrowed">
+                                        ● Borrowed
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="transaction-status returned">
+                                        ● Returned
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                    {% else %}
+
+                        <tr>
+
+                            <td colspan="7">
+
+                                <div class="empty-admin-state">
+
+                                    <div class="empty-admin-icon">
+                                        📋
+                                    </div>
+
+                                    <h3>
+                                        No Transactions Yet
+                                    </h3>
+
+                                    <p>
+                                        Book borrowing and return records
+                                        will appear here.
+                                    </p>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

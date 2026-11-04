@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Library Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        📚 Smart Library
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="#features">Books</a>
+
+        <a href="#about">About</a>
+
+        <a href="#contact">Contact</a>
+
+    </div>
+
+
+    <div class="nav-buttons">
+
+        <!-- LOGIN WORKING -->
+        <a href="{{ url_for('login') }}"
+           class="login-btn">
+
+            Login
+
+        </a>
+
+
+        <!-- REGISTER WORKING -->
+        <a href="{{ url_for('register') }}"
+           class="register-btn">
+
+            Register
+
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+
+    <div class="hero-content">
+
+        <p class="small-title">
+            WELCOME TO SMART LIBRARY
+        </p>
+
+
+        <h1>
+
+            Your Gateway to
+
+            <span>Knowledge</span>
+
+        </h1>
+
+
+        <p class="description">
+
+            Discover books, manage your borrowing history,
+            join smart waiting lists and get personalized
+            book recommendations.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+
+            <!-- EXPLORE BOOKS -->
+            <a href="#features"
+               class="primary-btn">
+
+                Explore Books →
+
+            </a>
+
+
+            <!-- GET STARTED WORKING -->
+            <a href="{{ url_for('register') }}"
+               class="secondary-btn">
+
+                Get Started
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT CARD -->
+
+    <div class="hero-card">
+
+        <div class="book-icon">
+            📖
+        </div>
+
+
+        <h2>
+            Smart Library
+        </h2>
+
+
+        <p>
+            Search • Borrow • Return • Discover
+        </p>
+
+
+        <div class="book-stats">
+
+
+            <div>
+
+                <strong>
+                    1000+
+                </strong>
+
+                <small>
+                    Books
+                </small>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    500+
+                </strong>
+
+                <small>
+                    Members
+                </small>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    24/7
+                </strong>
+
+                <small>
+                    Access
+                </small>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features"
+         id="features">
+
+
+    <h2>
+        Everything You Need
+    </h2>
+
+
+    <p class="section-description">
+
+        A simple and intelligent way to
+        manage your library experience.
+
+    </p>
+
+
+
+    <div class="feature-container">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🔍
+            </div>
+
+            <h3>
+                Search Books
+            </h3>
+
+            <p>
+                Quickly find books by title,
+                author or category.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📚
+            </div>
+
+            <h3>
+                Borrow Books
+            </h3>
+
+            <p>
+                Easily borrow and return
+                available books.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ⏳
+            </div>
+
+            <h3>
+                Smart Waitlist
+            </h3>
+
+            <p>
+                Join a queue when a book
+                is unavailable.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🤖
+            </div>
+
+            <h3>
+                AI Recommendations
+            </h3>
+
+            <p>
+                Get personalized book
+                suggestions.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="simple-section"
+         id="about">
+
+    <h2>
+        About Smart Library
+    </h2>
+
+    <p>
+        Smart Library is a digital library management
+        system designed to make finding, borrowing and
+        managing books easier.
+    </p>
+
+</section>
+
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="simple-section"
+         id="contact">
+
+    <h2>
+        Contact
+    </h2>
+
+    <p>
+        Have questions? Contact the library administrator.
+    </p>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 Smart Library Management System
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

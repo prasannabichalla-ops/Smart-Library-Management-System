@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card register-card">
+
+        <div class="auth-icon">
+            📚
+        </div>
+
+        <h1>
+            Create Account
+        </h1>
+
+        <p>
+            Join the Smart Library
+        </p>
+
+
+        {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <form method="POST">
+
+
+            <!-- PERSONAL DETAILS -->
+
+            <h3 class="form-section-title">
+                Personal Details
+            </h3>
+
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                required
+            >
+
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                required
+            >
+
+
+            <input
+    type="tel"
+    name="phone"
+    placeholder="Phone Number"
+    inputmode="numeric"
+    pattern="[0-9]{10}"
+    minlength="10"
+    maxlength="10"
+    required
+>
+
+
+            <!-- COLLEGE DETAILS -->
+
+            <h3 class="form-section-title">
+                College Details
+            </h3>
+
+
+            <input
+                type="text"
+                name="college"
+                placeholder="College Name"
+                required
+            >
+
+
+            <div class="form-row">
+
+                <select name="branch" required>
+
+                    <option value="">
+                        Select Branch
+                    </option>
+
+                    <option value="CSE">
+                        CSE
+                    </option>
+
+                    <option value="ECE">
+                        ECE
+                    </option>
+
+                    <option value="EEE">
+                        EEE
+                    </option>
+
+                    <option value="Mechanical">
+                        Mechanical
+                    </option>
+
+                    <option value="Civil">
+                        Civil
+                    </option>
+
+                    <option value="IT">
+                        IT
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <select name="year" required>
+
+                    <option value="">
+                        Select Year
+                    </option>
+
+                    <option value="1st Year">
+                        1st Year
+                    </option>
+
+                    <option value="2nd Year">
+                        2nd Year
+                    </option>
+
+                    <option value="3rd Year">
+                        3rd Year
+                    </option>
+
+                    <option value="4th Year">
+                        4th Year
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <input
+                    type="text"
+                    name="student_id"
+                    placeholder="Student ID / Roll No"
+                    required
+                >
+
+
+                <input
+                    type="text"
+                    name="section"
+                    placeholder="Section (e.g. A)"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <h3 class="form-section-title">
+                Account Security
+            </h3>
+
+
+            <input
+    type="password"
+    name="password"
+    placeholder="Password"
+    minlength="6"
+    required
+>
+
+
+            <button
+                type="submit"
+                class="primary-btn full-btn">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <p class="auth-bottom">
+
+            Already have an account?
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+        </p>
+
+
+        <a href="/" class="back-home">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

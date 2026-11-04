@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚
+            <span>Smart Library</span>
+        </div>
+
+        <div class="student-info">
+
+            <div class="student-avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Library Admin</strong>
+                <small>Administrator</small>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/admin" class="active">
+                📊 <span>Dashboard</span>
+            </a>
+
+            <a href="/admin/add-book">
+                ➕ <span>Add Book</span>
+            </a>
+
+            <a href="/admin/books">
+                📚 <span>Manage Books</span>
+            </a>
+
+            <a href="/admin/members">
+                👥 <span>Members</span>
+            </a>
+
+            <a href="/admin/transactions">
+                📋 <span>Transactions</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪 <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+
+        <!-- TOP BAR -->
+        <div class="dashboard-topbar">
+
+            <div>
+
+                <p class="dashboard-label">
+                    ADMINISTRATION
+                </p>
+
+                <h1>
+                    Admin Dashboard 📊
+                </h1>
+
+                <p class="dashboard-description">
+                    Manage books, members and library activities.
+                </p>
+
+            </div>
+
+            <div class="topbar-avatar">
+                A
+            </div>
+
+        </div>
+
+
+        <!-- STAT CARDS -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📚
+                </div>
+
+                <div>
+                    <p>Total Books</p>
+                    <h2>{{ total_books }}</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <div>
+                    <p>Total Members</p>
+                    <h2>{{ total_users }}</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📖
+                </div>
+
+                <div>
+                    <p>Issued Books</p>
+                    <h2>{{ issued_books }}</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div>
+                    <p>Waitlist Requests</p>
+                    <h2>{{ waitlist_count }}</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <section class="quick-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Quick Actions</h2>
+
+                    <p>
+                        Manage your library quickly.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+                <a href="/admin/add-book"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        ➕
+                    </div>
+
+                    <div>
+                        <h3>Add New Book</h3>
+
+                        <p>
+                            Add a new book to the library.
+                        </p>
+                    </div>
+
+                </a>
+
+
+                <a href="/admin/books"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        📚
+                    </div>
+
+                    <div>
+                        <h3>Manage Books</h3>
+
+                        <p>
+                            Edit or remove existing books.
+                        </p>
+                    </div>
+
+                </a>
+
+
+                <a href="/admin/members"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        👥
+                    </div>
+
+                    <div>
+                        <h3>View Members</h3>
+
+                        <p>
+                            View registered students.
+                        </p>
+                    </div>
+
+                </a>
+
+
+                <a href="/admin/transactions"
+                   class="quick-card">
+
+                    <div class="quick-icon">
+                        📋
+                    </div>
+
+                    <div>
+                        <h3>Transactions</h3>
+
+                        <p>
+                            View borrowing and return history.
+                        </p>
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECT FEATURES -->
+
+        <section class="admin-info">
+
+            <div class="admin-info-card">
+
+                <h2>🤖 Smart Library Features</h2>
+
+                <ul>
+
+                    <li>
+                        Personalized book recommendations
+                    </li>
+
+                    <li>
+                        Smart FIFO waiting list
+                    </li>
+
+                    <li>
+                        Student profile management
+                    </li>
+
+                    <li>
+                        Book borrowing and return tracking
+                    </li>
+
+                    <li>
+                        Complete transaction history
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

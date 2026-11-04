@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Waitlist - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .waitlist-position strong {
+            display: block;
+            margin-top: 6px;
+            color: #2563eb;
+            font-size: 18px;
+        }
+
+        .waitlist-status {
+            margin-top: 8px;
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #eef4ff;
+            color: #2563eb;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .queue-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #18243b;
+        }
+
+        .claim-form,
+        .cancel-form {
+            margin-top: 12px;
+        }
+
+        .claim-button {
+            border: none;
+            cursor: pointer;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            background: #2563eb;
+            color: white;
+        }
+
+        .claim-button:hover {
+            background: #1d4ed8;
+        }
+
+        .cancel-button {
+            border: none;
+            cursor: pointer;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .cancel-button:hover {
+            background: #fecaca;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚
+            <span>Smart Library</span>
+        </div>
+
+        <div class="student-info">
+
+            <div class="student-avatar">
+                {{ name[0]|upper }}
+            </div>
+
+            <div>
+                <strong>{{ name }}</strong>
+                <small>Student</small>
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/dashboard">
+                🏠
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/books">
+                📚
+                <span>Books</span>
+            </a>
+
+            <a href="/my-books">
+                📖
+                <span>My Books</span>
+            </a>
+
+            <a href="/waitlist" class="active">
+                ⏳
+                <span>Waitlist</span>
+            </a>
+
+            <a href="/recommendations">
+                🤖
+                <span>Recommendations</span>
+            </a>
+
+            <a href="/profile">
+                👤
+                <span>Profile</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-topbar">
+
+            <div>
+
+                <p class="dashboard-label">
+                    SMART WAITLIST
+                </p>
+
+                <h1>
+                    Waiting List ⏳
+                </h1>
+
+                <p class="dashboard-description">
+                    Track unavailable books and your waiting position.
+                </p>
+
+            </div>
+
+            <div class="topbar-avatar">
+                {{ name[0]|upper }}
+            </div>
+
+        </div>
+
+
+        <!-- WAITLIST -->
+
+        <div class="waitlist-container">
+
+            {% if waiting %}
+
+                {% for item in waiting %}
+
+                <div class="waitlist-card">
+
+                    <div class="waitlist-book-icon">
+                        📚
+                    </div>
+
+
+                    <div class="waitlist-details">
+
+                        <span class="book-category">
+                            SMART WAITLIST
+                        </span>
+
+                        <h2>
+                            {{ item.title }}
+                        </h2>
+
+                        <p>
+                            Author: {{ item.author }}
+                        </p>
+
+                        <p>
+                            Joined:
+                            {{ item.created_at }}
+                        </p>
+
+
+                        <!-- STATUS -->
+
+                        {% if item.status == "waiting" %}
+
+                            <span class="waitlist-status">
+                                🟢 Waiting in Queue
+                            </span>
+
+                            <!-- CANCEL BUTTON -->
+
+                            <form action="/cancel-waitlist/{{ item.id }}"
+                                  method="POST"
+                                  class="cancel-form">
+
+                                <button type="submit"
+                                        class="cancel-button">
+
+                                    ❌ Cancel Request
+
+                                </button>
+
+                            </form>
+
+
+                        {% elif item.status == "ready" %}
+
+                            <span class="waitlist-status">
+                                🟡 Ready for You
+                            </span>
+
+                            <!-- CLAIM BOOK BUTTON -->
+
+                            <form action="/claim-waitlist/{{ item.id }}"
+                                  method="POST"
+                                  class="claim-form">
+
+                                <button type="submit"
+                                        class="claim-button">
+
+                                    📚 Claim Book
+
+                                </button>
+
+                            </form>
+
+
+                        {% elif item.status == "fulfilled" %}
+
+                            <span class="waitlist-status">
+                                ✅ Completed
+                            </span>
+
+
+                        {% elif item.status == "cancelled" %}
+
+                            <span class="waitlist-status">
+                                ❌ Cancelled
+                            </span>
+
+
+                        {% else %}
+
+                            <span class="waitlist-status">
+                                {{ item.status }}
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- POSITION -->
+
+                    <div class="waitlist-position">
+
+                        <span>
+                            Your Position
+                        </span>
+
+
+                        {% if item.status == "waiting" %}
+
+                            <strong class="queue-number">
+                                #{{ item.position }}
+                            </strong>
+
+
+                        {% elif item.status == "ready" %}
+
+                            <strong>
+                                🎉 Ready
+                            </strong>
+
+
+                        {% elif item.status == "fulfilled" %}
+
+                            <strong>
+                                ✓
+                            </strong>
+
+
+                        {% else %}
+
+                            <strong>
+                                —
+                            </strong>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+
+            {% else %}
+
+                <!-- EMPTY WAITLIST -->
+
+                <div class="empty-books">
+
+                    <div class="empty-icon">
+                        ⏳
+                    </div>
+
+                    <h2>
+                        Your waitlist is empty
+                    </h2>
+
+                    <p>
+                        You are not waiting for any books right now.
+                    </p>
+
+                    <a href="/books"
+                       class="primary-btn">
+
+                        Explore Books →
+
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

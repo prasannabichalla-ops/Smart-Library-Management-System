@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Profile - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="dashboard-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚
+            <span>Smart Library</span>
+        </div>
+
+
+        <div class="student-info">
+
+            <div class="student-avatar">
+                {{ user["name"][0]|upper }}
+            </div>
+
+            <div>
+                <strong>{{ user["name"] }}</strong>
+                <small>Student</small>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="/dashboard">
+                🏠
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/books">
+                📚
+                <span>Books</span>
+            </a>
+
+            <a href="/my-books">
+                📖
+                <span>My Books</span>
+            </a>
+
+            <a href="/waitlist">
+                ⏳
+                <span>Waitlist</span>
+            </a>
+
+            <a href="/recommendations">
+                🤖
+                <span>Recommendations</span>
+            </a>
+
+            <a href="/profile" class="active">
+                👤
+                <span>Profile</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="dashboard-topbar">
+
+            <div>
+
+                <p class="dashboard-label">
+                    MY PROFILE
+                </p>
+
+                <h1>
+                    Student Profile 👤
+                </h1>
+
+                <p class="dashboard-description">
+                    View your personal and library information.
+                </p>
+
+            </div>
+
+
+            <div class="topbar-avatar">
+                {{ user["name"][0]|upper }}
+            </div>
+
+        </div>
+
+
+
+        <!-- PROFILE HEADER -->
+
+        <div class="profile-header">
+
+            <div class="profile-large-avatar">
+                {{ user["name"][0]|upper }}
+            </div>
+
+
+            <div>
+
+                <h2>
+                    {{ user["name"] }}
+                </h2>
+
+                <p>
+                    🎓 Student
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PERSONAL INFORMATION -->
+
+        <section class="profile-section">
+
+            <div class="profile-section-title">
+
+                <h2>
+                    👤 Personal Information
+                </h2>
+
+                <p>
+                    Your registered student details
+                </p>
+
+            </div>
+
+
+            <div class="profile-grid">
+
+
+                <div class="profile-field">
+
+                    <span>Full Name</span>
+
+                    <strong>
+                        {{ user["name"] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span>Email Address</span>
+
+                    <strong>
+                        {{ user["email"] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span>Phone Number</span>
+
+                    <strong>
+                        {{ user["phone"] or "Not provided" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span>Student ID / Roll No</span>
+
+                    <strong>
+                        {{ user["student_id"] or "Not provided" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span>College Name</span>
+
+                    <strong>
+                        {{ user["college"] or "Not provided" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span>Branch</span>
+
+                    <strong>
+                        {{ user["branch"] or "Not provided" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span>Year</span>
+
+                    <strong>
+                        {{ user["year"] or "Not provided" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span>Section</span>
+
+                    <strong>
+                        {{ user["section"] or "Not provided" }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ACCOUNT INFORMATION -->
+
+        <section class="profile-section">
+
+            <div class="profile-section-title">
+
+                <h2>
+                    🔐 Account Information
+                </h2>
+
+            </div>
+
+
+            <div class="profile-grid">
+
+
+                <div class="profile-field">
+
+                    <span>Account Type</span>
+
+                    <strong>
+                        🎓 Student
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span>Library Member</span>
+
+                    <strong class="profile-active">
+                        ● Active
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

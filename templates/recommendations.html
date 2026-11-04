@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Recommendations - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="dashboard-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚
+            <span>Smart Library</span>
+        </div>
+
+
+        <div class="student-info">
+
+            <div class="student-avatar">
+                {{ name[0]|upper }}
+            </div>
+
+            <div>
+                <strong>{{ name }}</strong>
+                <small>Student</small>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="/dashboard">
+                🏠
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/books">
+                📚
+                <span>Books</span>
+            </a>
+
+            <a href="/my-books">
+                📖
+                <span>My Books</span>
+            </a>
+
+            <a href="/waitlist">
+                ⏳
+                <span>Waitlist</span>
+            </a>
+
+            <a href="/recommendations" class="active">
+                🤖
+                <span>Recommendations</span>
+            </a>
+
+            <a href="/profile">
+                👤
+                <span>Profile</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="dashboard-topbar">
+
+            <div>
+
+                <p class="dashboard-label">
+                    SMART RECOMMENDATIONS
+                </p>
+
+                <h1>
+                    Recommended For You 🤖
+                </h1>
+
+                <p class="dashboard-description">
+                    Discover books based on your reading interests.
+                </p>
+
+            </div>
+
+
+            <div class="topbar-avatar">
+                {{ name[0]|upper }}
+            </div>
+
+        </div>
+
+
+
+        <!-- SMART MESSAGE -->
+
+        <div class="recommendation-banner">
+
+            <div class="recommendation-banner-icon">
+                🤖
+            </div>
+
+            <div>
+
+                <h2>
+                    Personalized Book Suggestions
+                </h2>
+
+                <p>
+                    Our system analyzes your borrowing history
+                    and suggests books that match your interests.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RECOMMENDATION HEADING -->
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Books You May Like 📚
+                </h2>
+
+                <p>
+                    Selected based on your reading activity.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RECOMMENDATION GRID -->
+
+        <div class="recommendation-grid">
+
+
+            {% for book in books %}
+
+            <div class="recommendation-card">
+
+
+                <!-- BOOK ICON -->
+
+                <div class="recommendation-cover">
+
+                    {% if book.category == "Programming" %}
+
+                        💻
+
+                    {% elif book.category == "Artificial Intelligence" %}
+
+                        🤖
+
+                    {% elif book.category == "Web Development" %}
+
+                        🌐
+
+                    {% elif book.category == "Computer Science" %}
+
+                        🧠
+
+                    {% elif book.category == "Self Development" %}
+
+                        🌱
+
+                    {% elif book.category == "Fantasy" %}
+
+                        🪄
+
+                    {% elif book.category == "Fiction" %}
+
+                        📖
+
+                    {% else %}
+
+                        📚
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- BOOK INFORMATION -->
+
+                <div class="recommendation-content">
+
+                    <span class="book-category">
+
+                        {{ book.category }}
+
+                    </span>
+
+
+                    <h3>
+
+                        {{ book.title }}
+
+                    </h3>
+
+
+                    <p class="book-author">
+
+                        by {{ book.author }}
+
+                    </p>
+
+
+                    <div class="recommendation-reason">
+
+                        💡 Recommended because it matches
+                        your reading interests.
+
+                    </div>
+
+
+
+                    <!-- AVAILABILITY -->
+
+                    {% if book.available > 0 %}
+
+                        <p class="availability available">
+
+                            ● {{ book.available }} available
+
+                        </p>
+
+
+                        <form method="POST"
+                              action="/borrow/{{ book.id }}">
+
+                            <button
+                                type="submit"
+                                class="borrow-btn">
+
+                                Borrow Book
+
+                            </button>
+
+                        </form>
+
+                    {% else %}
+
+                        <p class="availability unavailable">
+
+                            ● Currently unavailable
+
+                        </p>
+
+
+                        <form method="POST"
+                              action="/join-waitlist/{{ book.id }}">
+
+                            <button
+                                type="submit"
+                                class="waitlist-btn">
+
+                                ⏳ Join Waitlist
+
+                            </button>
+
+                        </form>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- NO RECOMMENDATIONS -->
+
+            <div class="empty-books">
+
+                <div class="empty-icon">
+                    🤖
+                </div>
+
+                <h2>
+                    No recommendations yet
+                </h2>
+
+                <p>
+                    Borrow a book to help us understand
+                    your reading interests.
+                </p>
+
+                <a href="/books"
+                   class="primary-btn">
+
+                    Explore Books →
+
+                </a>
+
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

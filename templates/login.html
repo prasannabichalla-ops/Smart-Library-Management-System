@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <div class="auth-icon">
+            📚
+        </div>
+
+        <h1>Welcome Back</h1>
+
+        <p>Login to your Smart Library account</p>
+
+
+        <!-- LOGIN TYPE -->
+
+        <div class="login-type">
+
+            <button type="button"
+                    id="studentTab"
+                    class="login-type-btn active"
+                    onclick="selectLogin('student')">
+
+                🎓 Student Login
+
+            </button>
+
+
+            <button type="button"
+                    id="adminTab"
+                    class="login-type-btn"
+                    onclick="selectLogin('admin')">
+
+                🔐 Admin Login
+
+            </button>
+
+        </div>
+
+
+        {% if error %}
+
+        <div class="error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <!-- LOGIN FORM -->
+
+        <form method="POST">
+
+            <input type="hidden"
+                   name="login_type"
+                   id="loginType"
+                   value="student">
+
+
+            <input type="email"
+                   name="email"
+                   placeholder="Email Address"
+                   required>
+
+
+            <input type="password"
+                   name="password"
+                   placeholder="Password"
+                   required>
+
+
+            <button type="submit"
+                    class="primary-btn full-btn"
+                    id="loginButton">
+
+                🎓 Student Login
+
+            </button>
+
+        </form>
+
+
+        <p class="auth-bottom"
+           id="registerText">
+
+            Don't have an account?
+
+            <a href="{{ url_for('register') }}">
+                Register
+            </a>
+
+        </p>
+
+
+        <a href="/"
+           class="back-home">
+
+            ← Back to Home
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function selectLogin(type) {
+
+    const studentTab =
+        document.getElementById("studentTab");
+
+    const adminTab =
+        document.getElementById("adminTab");
+
+    const loginType =
+        document.getElementById("loginType");
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+    const registerText =
+        document.getElementById("registerText");
+
+
+    if (type === "admin") {
+
+        adminTab.classList.add("active");
+
+        studentTab.classList.remove("active");
+
+        loginType.value = "admin";
+
+        loginButton.innerHTML =
+            "🔐 Admin Login";
+
+        registerText.style.display = "none";
+
+    } else {
+
+        studentTab.classList.add("active");
+
+        adminTab.classList.remove("active");
+
+        loginType.value = "student";
+
+        loginButton.innerHTML =
+            "🎓 Student Login";
+
+        registerText.style.display = "block";
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

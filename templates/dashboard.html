@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚
+            <span>Smart Library</span>
+        </div>
+
+        <div class="student-info">
+            <div class="student-avatar">
+                {{ name[0]|upper }}
+            </div>
+
+            <div>
+                <strong>{{ name }}</strong>
+                <small>Student</small>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="/dashboard" class="active">
+                🏠
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/books">
+                📚
+                <span>Books</span>
+            </a>
+
+            <a href="/my-books">
+                📖
+                <span>My Books</span>
+            </a>
+
+            <a href="/waitlist">
+                ⏳
+                <span>Waitlist</span>
+            </a>
+
+            <a href="/recommendations">
+                🤖
+                <span>Recommendations</span>
+            </a>
+
+            <a href="/profile">
+                👤
+                <span>Profile</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+
+        <!-- TOP BAR -->
+        <div class="dashboard-topbar">
+
+            <div>
+                <p class="dashboard-label">
+                    STUDENT DASHBOARD
+                </p>
+
+                <h1>
+                    Welcome back, {{ name }} 👋
+                </h1>
+
+                <p class="dashboard-description">
+                    Manage your books and discover something new.
+                </p>
+            </div>
+
+            <div class="topbar-avatar">
+                {{ name[0]|upper }}
+            </div>
+
+        </div>
+
+
+        <!-- STAT CARDS -->
+        <div class="dashboard-stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    📚
+                </div>
+
+                <div>
+                    <p>Total Books</p>
+                    <h2>100+</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    📖
+                </div>
+
+                <div>
+                    <p>My Books</p>
+                    <h2>0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    ⏳
+                </div>
+
+                <div>
+                    <p>Waitlist</p>
+                    <h2>0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    🤖
+                </div>
+
+                <div>
+                    <p>Recommendations</p>
+                    <h2>5</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Quick Actions</h2>
+
+                    <p>
+                        Access your most used library features.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+                <a href="/books" class="quick-card">
+
+                    <div class="quick-icon">
+                        🔍
+                    </div>
+
+                    <div>
+                        <h3>Search Books</h3>
+
+                        <p>
+                            Find books by title, author or category.
+                        </p>
+                    </div>
+
+                    <span>→</span>
+
+                </a>
+
+
+                <a href="/my-books" class="quick-card">
+
+                    <div class="quick-icon">
+                        📖
+                    </div>
+
+                    <div>
+                        <h3>My Books</h3>
+
+                        <p>
+                            View your borrowed books.
+                        </p>
+                    </div>
+
+                    <span>→</span>
+
+                </a>
+
+
+                <a href="/waitlist" class="quick-card">
+
+                    <div class="quick-icon">
+                        ⏳
+                    </div>
+
+                    <div>
+                        <h3>Waiting List</h3>
+
+                        <p>
+                            Track your position for unavailable books.
+                        </p>
+                    </div>
+
+                    <span>→</span>
+
+                </a>
+
+
+                <a href="/recommendations" class="quick-card">
+
+                    <div class="quick-icon">
+                        🤖
+                    </div>
+
+                    <div>
+                        <h3>Recommendations</h3>
+
+                        <p>
+                            Discover books based on your interests.
+                        </p>
+                    </div>
+
+                    <span>→</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECOMMENDATION PREVIEW -->
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Recommended For You 🤖</h2>
+
+                    <p>
+                        Personalized suggestions based on your reading activity.
+                    </p>
+                </div>
+
+                <a href="/recommendations" class="view-all">
+                    View All →
+                </a>
+
+            </div>
+
+
+            <div class="recommendation-preview">
+
+                <div class="book-preview">
+                    <div class="book-cover">
+                        📘
+                    </div>
+
+                    <h3>Python Programming</h3>
+
+                    <p>Programming</p>
+
+                    <button>
+                        Explore
+                    </button>
+                </div>
+
+
+                <div class="book-preview">
+                    <div class="book-cover">
+                        💻
+                    </div>
+
+                    <h3>Java Fundamentals</h3>
+
+                    <p>Programming</p>
+
+                    <button>
+                        Explore
+                    </button>
+                </div>
+
+
+                <div class="book-preview">
+                    <div class="book-cover">
+                        🧠
+                    </div>
+
+                    <h3>Artificial Intelligence</h3>
+
+                    <p>Technology</p>
+
+                    <button>
+                        Explore
+                    </button>
+                </div>
+
+
+                <div class="book-preview">
+                    <div class="book-cover">
+                        🌐
+                    </div>
+
+                    <h3>Web Development</h3>
+
+                    <p>Technology</p>
+
+                    <button>
+                        Explore
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

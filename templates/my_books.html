@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Books - Smart Library</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚
+            <span>Smart Library</span>
+        </div>
+
+        <div class="student-info">
+
+            <div class="student-avatar">
+                {{ name[0]|upper }}
+            </div>
+
+            <div>
+                <strong>{{ name }}</strong>
+                <small>Student</small>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="/dashboard">
+                🏠
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/books">
+                📚
+                <span>Books</span>
+            </a>
+
+            <a href="/my-books" class="active">
+                📖
+                <span>My Books</span>
+            </a>
+
+            <a href="/waitlist">
+                ⏳
+                <span>Waitlist</span>
+            </a>
+
+            <a href="/recommendations">
+                🤖
+                <span>Recommendations</span>
+            </a>
+
+            <a href="/profile">
+                👤
+                <span>Profile</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="/logout">
+                🚪
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+        <div class="dashboard-topbar">
+
+            <div>
+
+                <p class="dashboard-label">
+                    MY LIBRARY
+                </p>
+
+                <h1>
+                    My Books 📖
+                </h1>
+
+                <p class="dashboard-description">
+                    Manage the books you have currently borrowed.
+                </p>
+
+            </div>
+
+            <div class="topbar-avatar">
+                {{ name[0]|upper }}
+            </div>
+
+        </div>
+
+
+        <!-- BOOKS -->
+
+        <div class="my-books-container">
+
+            {% if books %}
+
+                {% for book in books %}
+
+                <div class="my-book-card">
+
+                    <div class="my-book-icon">
+                        📖
+                    </div>
+
+
+                    <div class="my-book-details">
+
+                        <span class="book-category">
+                            {{ book.category }}
+                        </span>
+
+                        <h2>
+                            {{ book.title }}
+                        </h2>
+
+                        <p>
+                            Author: <strong>{{ book.author }}</strong>
+                        </p>
+
+                        <p class="borrow-date">
+                            📅 Borrowed:
+                            {{ book.borrowed_at }}
+                        </p>
+
+                    </div>
+
+
+                    <div class="my-book-action">
+
+                        <span class="borrow-status">
+                            ● Currently Borrowed
+                        </span>
+
+                        <form method="POST"
+                              action="/return/{{ book.transaction_id }}">
+
+                            <button
+                                type="submit"
+                                class="return-btn">
+
+                                ↩ Return Book
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty-books">
+
+                    <div class="empty-icon">
+                        📚
+                    </div>
+
+                    <h2>
+                        No borrowed books
+                    </h2>
+
+                    <p>
+                        You haven't borrowed any books yet.
+                    </p>
+
+                    <a href="/books"
+                       class="primary-btn">
+
+                        Explore Books →
+
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
